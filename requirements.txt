@@ -1,0 +1,16 @@
+# Data Handling
+pandas
+numpy
+
+# Machine Learning & Deep Learning
+scikit-learn
+tensorflow
+
+# NLP for Persian Language
+hazm
+
+# Configuration & Utilities
+PyYAML
+
+# For running notebooks
+ipykernel

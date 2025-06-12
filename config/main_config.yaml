@@ -1,0 +1,64 @@
+#=================================================
+# File and Directory Paths
+#=================================================
+data_paths:
+  banners: "data/raw/banners.txt"
+  p_train: "data/raw/p_train.csv"
+  p_test: "data/raw/p_test.csv"
+  submission_file: "submission.csv" # Name for the final output file
+
+artifact_paths:
+  # Directory to store all artifacts (models, vectorizers, etc.)
+  artifacts_dir: "artifacts/"
+  # Specific artifact file names
+  vectorizer_file: "tfidf_vectorizer.pkl"
+  model_file: "preference_model.h5"
+
+#=================================================
+# Feature Engineering Parameters
+#=================================================
+feature_params:
+  # Parameters for TF-IDF Vectorizer
+  tfidf:
+    # This corresponds to d2: the dimension of the banner embeddings
+    # تعداد ویژگی‌هایی (کلمات) که برای ساخت بردار بنرها استفاده می‌شود
+    max_features: 5000
+    # Consider single words (1,1) and bigrams (1,2)
+    ngram_range: [1, 2]
+
+
+
+
+
+
+#=================================================
+# Model & Training Hyperparameters
+#=================================================
+model_params:
+  # d1: Dimension of the user semantic space (given in the problem)
+  user_embedding_dim: 8
+  # C: Number of user clusters/segments (given in the problem)
+  num_segments: 500
+  
+  # --- پارامترهای ضروری برای معماری مدل ---
+  segment_embedding_dim: 32 # Dimension for the segment embedding layer
+  dense_layers: [256, 512]    # Size of hidden layers after concatenation
+  dropout_rate: 0.0         # Dropout rate for regularization
+  
+  # Training settings
+  learning_rate: 0.03
+  epochs: 35
+  batch_size: 40
+  validation_split: 0.15 # Use 15% of training data for validation
+
+  
+
+
+  #=================================================
+# File and Directory Paths
+#=================================================
+data_paths:
+  banners: "data/raw/banners.txt"
+  p_train: "data/raw/p_train.csv"
+  p_test: "data/raw/p_test.csv"
+  submission_file: "submission.csv"
