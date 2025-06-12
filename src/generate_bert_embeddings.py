@@ -6,7 +6,9 @@ import pandas as pd
 from tqdm import tqdm
 
 # نام مدل از پیش آموزش دیده فارسی
-MODEL_NAME = "HooshvareLab/bert-fa-base-uncased"
+# MODEL_NAME = "HooshvareLab/bert-fa-base-uncased"
+MODEL_NAME = "HooshvareLab/bert-fa-zwnj-base"
+
 
 print("Loading tokenizer and model...")
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
@@ -23,7 +25,7 @@ all_embeddings = []
 print("Generating embeddings for all banners...")
 with torch.no_grad():
     for text in tqdm(captions):
-        inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=128).to(device)
+        inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=96).to(device)
         outputs = model(**inputs)
         # ما از بردار [CLS] به عنوان نمایش کل جمله استفاده می‌کنیم
         cls_embedding = outputs.last_hidden_state[:, 0, :].cpu().numpy()

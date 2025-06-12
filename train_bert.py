@@ -27,18 +27,23 @@ def run_bert_training():
     X_train, y_train = data_manager.get_data_for_model(df=data_manager.p_train_df)
     
     # 3. ساخت مدل BERT
-    model = create_bert_model(config=config)
+  
 
 
+    # ✨ تغییر: محاسبه تعداد ویژگی‌های جدید و پاس دادن آن به تابع ساخت مدل
+    num_extra_features = X_train[2].shape[1] # X_train[2] همان ویژگی‌های مهندسی‌شده است
 
+    logger.info(f"Number of engineered features: {num_extra_features}")
     # --- ۴. ساخت مدل BERT ---
-    model = create_bert_model(config=config)
+    # model = create_bert_model(config=config)
+    model = create_bert_model(config=config, num_extra_features=num_extra_features)
+
     
     # --- ۵. تعریف Callbacks برای آموزش ---
     artifacts_dir = Path(config['artifact_paths']['artifacts_dir'])
     model_path = artifacts_dir / "preference_model_bert.h5" 
     
-    early_stopping = EarlyStopping(monitor='val_loss', patience=15, verbose=1, restore_best_weights=True)
+    early_stopping = EarlyStopping(monitor='val_loss', patience=5, verbose=1, restore_best_weights=True)
     model_checkpoint = ModelCheckpoint(filepath=model_path, monitor='val_loss', save_best_only=True)
     
     # ✨ ۲. تعریف کردن ReduceLROnPlateau
@@ -48,7 +53,7 @@ def run_bert_training():
         monitor='val_loss',
         factor=0.1,             # ضریب کاهش: new_lr = lr * factor
         patience=2,             # تعداد دورهای انتظار برای بهبود
-        min_lr=0.0001,         # حداقل مقدار ممکن برای نرخ یادگیری
+        min_lr=0.000001,         # حداقل مقدار ممکن برای نرخ یادگیری
         verbose=1               # نمایش پیام هنگام کاهش نرخ یادگیری
     )
     

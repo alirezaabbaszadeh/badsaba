@@ -41,14 +41,14 @@ model_params:
   num_segments: 500
   
   # --- پارامترهای ضروری برای معماری مدل ---
-  segment_embedding_dim: 32 # Dimension for the segment embedding layer
-  dense_layers: [256, 512]    # Size of hidden layers after concatenation
+  segment_embedding_dim: 40 # Dimension for the segment embedding layer
+  dense_layers: [256, 256]    # Size of hidden layers after concatenation
   dropout_rate: 0.0         # Dropout rate for regularization
   
   # Training settings
-  learning_rate: 0.03
-  epochs: 35
-  batch_size: 40
+  learning_rate: 0.0001
+  epochs: 12
+  batch_size: 4
   validation_split: 0.15 # Use 15% of training data for validation
 
   
