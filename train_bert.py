@@ -52,8 +52,8 @@ def run_bert_training():
     reduce_lr = ReduceLROnPlateau(
         monitor='val_loss',
         factor=0.1,             # ضریب کاهش: new_lr = lr * factor
-        patience=2,             # تعداد دورهای انتظار برای بهبود
-        min_lr=0.000001,         # حداقل مقدار ممکن برای نرخ یادگیری
+        patience=1,             # تعداد دورهای انتظار برای بهبود
+        min_lr=0.00001,         # حداقل مقدار ممکن برای نرخ یادگیری
         verbose=1               # نمایش پیام هنگام کاهش نرخ یادگیری
     )
     

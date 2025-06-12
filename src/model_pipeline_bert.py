@@ -48,7 +48,8 @@ def create_bert_model(config: dict, num_extra_features: int) -> Model:
     model.compile(
         optimizer=optimizer,
         loss='mean_absolute_error', # می‌توانید اینجا 'huber_loss' را هم امتحان کنید
-        metrics=['mean_absolute_error', r_squared]
+        # metrics=['mean_absolute_error', r_squared]
+        metrics=['huber_loss', r_squared]
     )
     
     logger.info("✅ Keras BERT model with extra features created and compiled successfully.")

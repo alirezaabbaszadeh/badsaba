@@ -25,7 +25,7 @@ all_embeddings = []
 print("Generating embeddings for all banners...")
 with torch.no_grad():
     for text in tqdm(captions):
-        inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=96).to(device)
+        inputs = tokenizer(text, return_tensors="pt", truncation=True, padding=True, max_length=130).to(device)
         outputs = model(**inputs)
         # ما از بردار [CLS] به عنوان نمایش کل جمله استفاده می‌کنیم
         cls_embedding = outputs.last_hidden_state[:, 0, :].cpu().numpy()
